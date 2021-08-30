@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TodoList from "./components/TodoList";
 import TodoForm from "./components/TodoForm";
+import "./components/Todo.css";
 
 const todo = [
   {
@@ -23,8 +24,20 @@ class App extends React.Component {
     };
   }
 
-  handleToggle = () => {
-    return;
+  handleToggle = (id) => {
+    this.setState({
+      ...this.state,
+      todo: this.state.todo.map((task) => {
+        if (id === task.id) {
+          return {
+            ...task,
+            completed: !task.completed,
+          };
+        } else {
+          return task;
+        }
+      }),
+    });
   };
 
   handleAdd = () => {
@@ -41,8 +54,8 @@ class App extends React.Component {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <TodoList todo={this.state.todo} />
-        <TodoForm />
+        <TodoList handleToggle={this.handleToggle} todo={this.state.todo} />
+        <TodoForm handleAdd={this.handleAdd} handleClear={this.handleClear} />
       </div>
     );
   }
