@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TodoList from "./components/TodoList";
 import TodoForm from "./components/TodoForm";
 import "./components/Todo.css";
+import SearchBar from "./components/SearchBar";
 
 const todo = [
   {
@@ -53,21 +54,30 @@ class App extends React.Component {
   };
 
   handleClear = () => {
-    //set state
     this.setState({
       ...this.state,
       todo: this.state.todo.filter((task) => {
         return task.completed === false;
       }),
     });
-    //spread state
-    //get rid of completed tasks
+  };
+
+  handleSearch = (searchString) => {
+    this.setState({
+      ...this.state,
+      todo: this.state.todo.filter((task) => {
+        return task.task.toLowerCase().includes(searchString.toLowerCase());
+      }),
+    });
   };
 
   render() {
     return (
-      <div>
-        <h2>Welcome to your Todo App!</h2>
+      <div className="App">
+        <header className="header">
+          <h2>Todo List!</h2>
+          <SearchBar handleSearch={this.handleSearch} />
+        </header>
         <TodoList handleToggle={this.handleToggle} todo={this.state.todo} />
         <TodoForm handleAdd={this.handleAdd} handleClear={this.handleClear} />
       </div>
