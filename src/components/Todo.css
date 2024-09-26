@@ -1,0 +1,19 @@
+body{
+    border: 1px red solid;
+    margin: 0 auto;
+    text-align: center;
+}
+header {
+    color: #1b263b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding:1% 5%;
+    background-color: #ff758f;
+}
+
+
+.completed {
+    text-decoration: line-through;
+}
